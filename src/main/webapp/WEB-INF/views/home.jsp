@@ -6,6 +6,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello from my first Spring MVC App!</h1>
+        <h1>${myMessage}</h1>
     </body>
 </html>
