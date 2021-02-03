@@ -1,0 +1,40 @@
+package emergon.controller;
+
+import emergon.entity.Customer;
+import emergon.service.CustomerService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+@RequestMapping("/customer")
+public class CustomerController {
+    
+    @Autowired
+    private CustomerService service;
+    
+    @RequestMapping
+    public ModelAndView showCustomers(ModelAndView modelAndView){
+        List<Customer> customers = service.getCustomers();
+        modelAndView.addObject("listOfCustomers", customers);
+        modelAndView.setViewName("customerList");
+        return modelAndView;
+    }
+    
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public String showForm(){
+        return "customerForm";
+    }
+    
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String create(Customer customer, Model model){
+        List<Customer> customers = service.getCustomers();
+        customers.add(customer);
+        model.addAttribute("listOfCustomers", customers);
+        return "customerList";
+    }
+}

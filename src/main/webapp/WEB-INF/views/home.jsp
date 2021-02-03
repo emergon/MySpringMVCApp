@@ -7,5 +7,6 @@
     </head>
     <body>
         <h1>${myMessage}</h1>
+        <a href="${pageContext.request.contextPath}/customer">Customers</a>
     </body>
 </html>
