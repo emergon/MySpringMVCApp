@@ -7,12 +7,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerService {
-    
-    public List<Customer> getCustomers(){
-        List<Customer> customers = new ArrayList();
-        customers.add(new Customer(1, "Jack"));
-        customers.add(new Customer(2, "Jonathan"));
-        customers.add(new Customer(3, "Jenny"));
+
+    private List<Customer> customers;
+
+    public List<Customer> getCustomers() {
+        if (customers == null) {
+            customers = new ArrayList();
+            customers.add(new Customer(1, "Jack"));
+            customers.add(new Customer(2, "Jonathan"));
+            customers.add(new Customer(3, "Jenny"));
+        }
         return customers;
+    }
+
+    public void addCustomer(Customer customer) {
+        customers.add(customer);
     }
 }

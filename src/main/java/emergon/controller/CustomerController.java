@@ -25,6 +25,12 @@ public class CustomerController {
         return modelAndView;
     }
     
+    /**
+     * URLs
+     * /customer/create : GET  (customerList.jsp - link)
+     * /customer/create : POST (customerForm.jsp - form)
+     */
+    
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String showForm(){
         return "customerForm";
@@ -32,8 +38,8 @@ public class CustomerController {
     
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(Customer customer, Model model){
+        service.addCustomer(customer);
         List<Customer> customers = service.getCustomers();
-        customers.add(customer);
         model.addAttribute("listOfCustomers", customers);
         return "customerList";
     }
