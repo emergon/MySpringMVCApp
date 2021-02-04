@@ -6,9 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/customer")
@@ -37,10 +41,31 @@ public class CustomerController {
     }
     
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(Customer customer, Model model){
+    public String create(Customer customer, RedirectAttributes attributes){
         service.addCustomer(customer);
-        List<Customer> customers = service.getCustomers();
-        model.addAttribute("listOfCustomers", customers);
-        return "customerList";
+        String minima = "Customer "+ customer.getCname() + " successfully created!!";
+        attributes.addFlashAttribute("message", minima);
+        return "redirect:/customer";//Redirect instructs client to sent a new GET request to /customer
     }
+    
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") int id, RedirectAttributes attributes){
+        service.deleteCustomer(id);
+        String minima = "Customer successfully deleted!!";
+        attributes.addFlashAttribute("message", minima);
+        return "redirect:/customer";
+    }
+    
+    @GetMapping("/update/{ccode}")
+    public String showFormUpdate(@PathVariable(name = "ccode") int ccode, Model model){
+        Customer customer = service.getCustomerById(ccode);
+        model.addAttribute("customerToEdit", customer);
+        return "customerForm";
+    }
+    
+    
+    
+    
+    
+    
 }

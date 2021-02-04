@@ -23,4 +23,22 @@ public class CustomerService {
     public void addCustomer(Customer customer) {
         customers.add(customer);
     }
+
+    public void deleteCustomer(int id) {
+        for(Customer c: customers){
+            if(c.getCcode().equals(id)){
+                customers.remove(c);
+                break;
+            }
+        }
+    }
+
+    public Customer getCustomerById(int ccode) {
+        for(Customer c: customers){
+            if(c.getCcode() == ccode){
+                return c;
+            }
+        }
+        return null;
+    }
 }

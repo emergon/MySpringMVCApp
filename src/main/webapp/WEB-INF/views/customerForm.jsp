@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,14 +14,22 @@
     </head>
     <body>
         <h1>Create your fantastic customer</h1>
-        <form action="${pageContext.request.contextPath}/customer/create" method="POST">
-            <label for="ccode">Code:</label>
-            <input id="ccode" type="number" name="ccode"/>
-            <br/>
-            <label for="cname">Name:</label>
-            <input id="cname" type="text" name="cname"/>
-            <br/>
-            <input type="submit" value="Submit"/>
-        </form>
-    </body>
+        
+    <c:if test="${customerToEdit==null}">
+        <c:url value="/customer/create" var="link"/>
+    </c:if>
+    <c:if test="${customerToEdit!=null}">
+        <c:url value="/customer/update" var="link"/>
+    </c:if>
+        <a href="${link}">Test Link</a>
+    <form action="${link}" method="POST">
+        <label for="ccode">Code:</label>
+        <input id="ccode" type="number" name="ccode" value="${customerToEdit.ccode}"/>
+        <br/>
+        <label for="cname">Name:</label>
+        <input id="cname" type="text" name="cname" value="${customerToEdit.cname}"/>
+        <br/>
+        <input type="submit" value="Submit"/>
+    </form>
+</body>
 </html>

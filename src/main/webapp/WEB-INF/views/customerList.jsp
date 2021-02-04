@@ -16,18 +16,29 @@
         <h1>This is my List of customers</h1>
         <div>
             <h3>Customers</h3>
+            <p>
+                ${message}
+            </p>
             <a href="${pageContext.request.contextPath}/customer/create">Add customer</a>
-            <table>
+            <table border="1">
                 <thead>
                     <tr>
                         <th>Code</th>
                         <th>Name</th>
+                        <th>Update</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <c:forEach items="${listOfCustomers}" var = "customer">
                     <tr>
                         <td>${customer.ccode}</td>
                         <td>${customer.cname}</td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/customer/update/${customer.ccode}">Update</a>
+                        </td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/customer/delete?id=c">Delete</a>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
