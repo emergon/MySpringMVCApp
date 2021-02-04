@@ -19,9 +19,8 @@
         <c:url value="/customer/create" var="link"/>
     </c:if>
     <c:if test="${customerToEdit!=null}">
-        <c:url value="/customer/update" var="link"/>
+        <c:url  value="/customer/update" var="link"/>
     </c:if>
-        <a href="${link}">Test Link</a>
     <form action="${link}" method="POST">
         <label for="ccode">Code:</label>
         <input id="ccode" type="number" name="ccode" value="${customerToEdit.ccode}"/>

@@ -33,11 +33,11 @@
                     <tr>
                         <td>${customer.ccode}</td>
                         <td>${customer.cname}</td>
-                        <td>
+                        <td>      
                             <a href="${pageContext.request.contextPath}/customer/update/${customer.ccode}">Update</a>
                         </td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/customer/delete?id=c">Delete</a>
+                            <a href="${pageContext.request.contextPath}/customer/delete?id=${customer.ccode}">Delete</a>
                         </td>
                     </tr>
                 </c:forEach>

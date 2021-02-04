@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,10 +58,18 @@ public class CustomerController {
     }
     
     @GetMapping("/update/{ccode}")
-    public String showFormUpdate(@PathVariable(name = "ccode") int ccode, Model model){
+    public String showFormUpdate(@PathVariable("ccode") int ccode, Model model){
         Customer customer = service.getCustomerById(ccode);
         model.addAttribute("customerToEdit", customer);
         return "customerForm";
+    }
+    
+    @PostMapping("/update")
+    public String update(Customer customer, RedirectAttributes attributes){
+        service.updateCustomer(customer);
+        String minima = "Customer updated successfully!!";
+        attributes.addFlashAttribute("message", minima);
+        return "redirect:/customer";
     }
     
     

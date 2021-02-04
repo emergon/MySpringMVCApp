@@ -41,4 +41,11 @@ public class CustomerService {
         }
         return null;
     }
+
+    public Customer updateCustomer(Customer customer) {//customer argument contains the new data from the form
+        //Find customer from list and add it to the variable customerToUpdate
+        Customer customerToUpdate = getCustomerById(customer.getCcode());
+        customerToUpdate.setCname(customer.getCname());
+        return customerToUpdate;
+    }
 }
