@@ -8,6 +8,7 @@ package emergon.repository;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -46,10 +47,16 @@ public class HibernateUtil<E> {
         return e;
     }
     
-    public void delete(Class<E> type, int id){
+    public boolean delete(Class<E> type, int id) {
+        boolean deleted = true;
         session = getSession();
         E e = session.find(type, id);
-        session.remove(e);
+        try{
+            session.remove(e);
+        }catch(ConstraintViolationException cve){
+            deleted = false;
+        }
+        return deleted;
     }
     
     

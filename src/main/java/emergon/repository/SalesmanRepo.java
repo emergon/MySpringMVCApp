@@ -4,6 +4,8 @@ import emergon.entity.Salesman;
 import emergon.entity.Salesman;
 import java.util.List;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 
 @Repository
 public class SalesmanRepo extends HibernateUtil<Salesman> implements CrudRepo<Salesman>{
@@ -14,26 +16,18 @@ public class SalesmanRepo extends HibernateUtil<Salesman> implements CrudRepo<Sa
     }
 
     @Override
-    public void delete(int id) {
-        super.delete(Salesman.class, id);
+    public boolean delete(int id) {
+        return super.delete(Salesman.class, id);
     }
 
     @Override
     public Salesman findById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return super.find(Salesman.class, id);
     }
 
     @Override
     public List<Salesman> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return super.findAll("Salesman.findAll");
     }
-    
-//    public List<Salesman> findAll(){
-//        return super.findAll("Salesman.findAll");
-//    }
-//    
-//    public Salesman find(int id){
-//        return super.find(Salesman.class, id);
-//    }
     
 }
