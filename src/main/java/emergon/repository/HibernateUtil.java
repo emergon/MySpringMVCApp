@@ -26,38 +26,31 @@ public class HibernateUtil<E> {
         session = sessionFactory.getCurrentSession();//One for each connection to DB
         return session;
     }
-    
+
     //Methods for CRUD operations
-    protected List<E> findAll(String query){
+    protected List<E> findAll(String query) {
         getSession();
         Query myQuery = session.createNamedQuery(query);
         List<E> list = myQuery.getResultList();
         return list;
     }
-    
-    protected E save(E entity){
+
+    protected E save(E entity) {
         session = getSession();
         session.saveOrUpdate(entity);
         return entity;
     }
-    
-    protected E find(Class<E> type, int id){
+
+    protected E find(Class<E> type, int id) {
         session = getSession();
         E e = session.find(type, id);
         return e;
     }
-    
-    public boolean delete(Class<E> type, int id) {
-        boolean deleted = true;
+
+    public void delete(Class<E> type, int id) {
         session = getSession();
         E e = session.find(type, id);
-        try{
-            session.remove(e);
-        }catch(ConstraintViolationException cve){
-            deleted = false;
-        }
-        return deleted;
+        session.remove(e);
     }
-    
-    
+
 }

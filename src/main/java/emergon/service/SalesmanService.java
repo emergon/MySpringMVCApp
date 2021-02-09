@@ -24,15 +24,8 @@ public class SalesmanService {
         return salesmanRepo.save(salesman);
     }
 
-    public String deleteSalesman(int id) {
-        boolean deleted = salesmanRepo.delete(Salesman.class, id);
-        String message;
-        if(deleted == true){
-            message = "Salesman deleted successfully";
-        }else{
-            message = "Salesman cannot be deleted. Referenced from another table!!";
-        }
-        return message;
+    public void deleteSalesman(int id) {
+        salesmanRepo.delete(Salesman.class, id);
     }
 
     public Salesman getSalesmanById(int id) {

@@ -16,8 +16,8 @@ public class SalesmanRepo extends HibernateUtil<Salesman> implements CrudRepo<Sa
     }
 
     @Override
-    public boolean delete(int id) {
-        return super.delete(Salesman.class, id);
+    public void delete(int id) {
+        super.delete(Salesman.class, id);
     }
 
     @Override
