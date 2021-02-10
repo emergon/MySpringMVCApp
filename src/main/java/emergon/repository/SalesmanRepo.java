@@ -1,10 +1,8 @@
 package emergon.repository;
 
 import emergon.entity.Salesman;
-import emergon.entity.Salesman;
 import java.util.List;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 
 @Repository

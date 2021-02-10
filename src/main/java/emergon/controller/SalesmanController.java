@@ -1,10 +1,11 @@
 package emergon.controller;
 
+import emergon.entity.Family;
 import emergon.entity.Salesman;
+import emergon.service.FamilyService;
 import emergon.service.SalesmanService;
 import java.util.List;
 import javax.validation.Valid;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,8 @@ public class SalesmanController {
 
     @Autowired
     private SalesmanService service;
+    @Autowired
+    private FamilyService familyService;
 
     @RequestMapping
     public ModelAndView showSalesmen(ModelAndView modelAndView) {
@@ -102,4 +105,17 @@ public class SalesmanController {
         return "redirect:/salesman";
     }
 
+    @GetMapping("/{id}/family")
+    public String showFamily(@PathVariable(name = "id") int scode, Model model){
+        List<Family> family = familyService.getFamilyBySalesman(scode);
+        String message;
+        if(family.isEmpty()){
+            message = scode + " does not have any registered family members!";
+        }else{
+            message = "Salesman family members are:";
+        }
+        model.addAttribute("family", family);
+        model.addAttribute("message", message);
+        return "salesman/familyList";
+    }
 }
