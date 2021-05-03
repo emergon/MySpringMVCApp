@@ -107,6 +107,7 @@ public class SalesmanController {
 
     @GetMapping("/{id}/family")
     public String showFamily(@PathVariable(name = "id") int scode, Model model){
+        Salesman salesman = service.getSalesmanById(scode);
         List<Family> family = familyService.getFamilyBySalesman(scode);
         String message;
         if(family.isEmpty()){
@@ -114,6 +115,7 @@ public class SalesmanController {
         }else{
             message = "Salesman family members are:";
         }
+        model.addAttribute("salesman", salesman);
         model.addAttribute("family", family);
         model.addAttribute("message", message);
         return "salesman/familyList";

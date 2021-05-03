@@ -17,7 +17,8 @@
         
         <div>
             <h3>${message}</h3>
-            <a href="${pageContext.request.contextPath}/family/create">Add family</a>
+            <p>${salesman.scode}</p>
+            <a href="${pageContext.request.contextPath}/family/create?salesmanId=${salesman.scode}">Add family</a>
             <table border="1">
                 <thead>
                     <tr>

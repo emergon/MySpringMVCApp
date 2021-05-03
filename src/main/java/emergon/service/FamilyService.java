@@ -18,6 +18,10 @@ public class FamilyService {
         List<Family> family = familyRepo.findBySalesmanGetterList(scode);
         return family;
     }
+
+    public void addFamily(Family family) {
+        familyRepo.save(family);
+    }
    
     
 }

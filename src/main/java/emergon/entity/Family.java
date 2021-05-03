@@ -6,6 +6,7 @@
 package emergon.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -24,6 +25,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -58,8 +60,8 @@ public class Family implements Serializable {
     @Column(name = "frelationship")
     private String frelationship;
     @Column(name = "dob")
-    @Temporal(TemporalType.DATE)
-    private Date dob;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dob;
     @JoinColumn(name = "salesman", referencedColumnName = "scode")
     @ManyToOne(fetch = FetchType.LAZY)
     private Salesman salesman;
@@ -100,11 +102,11 @@ public class Family implements Serializable {
         this.frelationship = frelationship;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 

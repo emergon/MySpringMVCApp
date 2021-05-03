@@ -150,7 +150,7 @@ public class Salesman implements Serializable {
 
     @Override
     public String toString() {
-        return "emergon.entity.Salesman[ scode=" + scode + " ]";
+        return "Salesman,scode="+scode;
     }
     
 }
